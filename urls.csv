@@ -1,0 +1,101 @@
+﻿municipio,tipo,url,activo,notas
+Acacias,Portal,https://www.acacias-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Aguachica,Portal,https://www.aguachica-cesar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Aguazul,Portal,https://www.aguazul-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Aipe,Portal,https://www.aipe-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Arauca,Portal,https://www.arauca-arauca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Ariguaní,Portal,https://www.ariguani-magdalena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Astrea,Portal,https://www.astrea-cesar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Baraya,Portal,https://www.baraya-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Barrancabermeja,Portal,https://www.barrancabermeja-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Barranquilla (Juan Mina),Portal,https://www.barranquilla.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Bogotá D.C.,Portal,https://www.haciendabogota.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cabuyaro,Portal,https://www.cabuyaro-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cantagallo,Portal,https://www.cantagallo-bolivar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cartagena,Portal,https://www.cartagena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Castilla la Nueva,Portal,https://www.castillalanueva-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Chaparral,Portal,https://www.chaparral-tolima.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Chía,Portal,https://www.chia-cundinamarca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Chinú,Portal,https://www.chinu-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cicuco,Portal,https://www.cicuco-bolivar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cimitarra,Portal,https://www.cimitarra-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cota,Portal,https://www.cota-cundinamarca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cúcuta,Portal,https://www.cucuta-nortedesantander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Cumaral,Portal,https://www.cumaral-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Fundación,Portal,https://www.fundacion-magdalena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Funza,Portal,https://www.funza-cundinamarca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Gachancipá,Portal,https://www.gachancipa-cundinamarca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Girón,Portal,https://www.giron-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Guaduas,Portal,https://www.guaduas-cundinamarca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Guamal,Portal,https://www.guamal-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Maicao,Portal,https://www.maicao-laguajira.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Malambo,Portal,https://www.malambo-atlantico.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Maní,Portal,https://www.mani-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Melgar,Portal,https://www.melgar-tolima.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Montería,Portal,https://www.monteria-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Neiva,Portal,https://www.alcaldianeiva.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Orito,Portal,https://www.orito-putumayo.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Orocué,Portal,https://www.orocue-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Ortega,Portal,https://www.ortega-tolima.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Ovejas,Portal,https://www.ovejas-sucre.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Paicol,Portal,https://www.paicol-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Palermo,Portal,https://www.palermo-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Paz De Ariporo,Portal,https://www.pazdeariporo-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Piamonte,Portal,https://www.piamonte-cauca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Piojo,Portal,https://www.piojo-atlantico.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Pivijay,Portal,https://www.pivijay-magdalena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Planeta Rica,Portal,https://www.planetarica-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Plato,Portal,https://www.plato-magdalena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Pueblo Nuevo,Portal,https://www.pueblonuevo-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto Asis,Portal,https://www.puertoasis-putumayo.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto Boyacá,Portal,https://www.puertoboyaca-boyaca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto Gaitán,Portal,https://www.puertogaitan-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto López,Portal,https://www.puertolopez-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto Parra,Portal,https://www.puertoparra-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Puerto Wilches,Portal,https://www.puertowilches-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Purificación,Portal,https://www.purificacion-tolima.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Riohacha,Portal,https://www.riohacha-laguajira.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Río de Oro,Portal,https://www.riodeoro-cesar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Rionegro,Portal,https://www.rionegro-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Sabana De Torres,Portal,https://www.sabanadetorres-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Sabana Larga,Portal,https://www.sabanalarga-atlantico.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Sabanas de San Ángel,Portal,https://www.sabanasdesanangel-magdalena.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Sahagún,Portal,https://www.sahagun-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+San Luis de Palenque,Portal,https://www.sanluisdepalenque-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+San Martín,Portal,https://www.sanmartin-cesar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+San Miguel,Portal,https://www.sanmiguel-putumayo.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Santa Rosa del Norte,Portal,https://www.santarosa-bolivar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Santiago de Tolú,Portal,https://www.santiagodetolu-sucre.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Saravena,Portal,https://www.saravena-arauca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Simacota,Portal,https://www.simacota-santander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Tame,Portal,https://www.tame-arauca.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Tauramena,Portal,https://www.tauramena-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Tesalia,Portal,https://www.tesalia-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Tibú,Portal,https://www.tibu-nortedesantander.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Tierralta,Portal,https://www.tierralta-cordoba.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Valle del Guamuez (La Hormiga),Portal,https://www.valledelguamuez-putumayo.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Villagarzón,Portal,https://www.villagarzon-putumayo.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Villanueva,Portal,https://www.villanueva-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Villavicencio,Portal,https://www.villavicencio.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Yondó,Portal,https://www.yondo-antioquia.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Yopal,Portal,https://www.yopal-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
+,Portal,,SI,
