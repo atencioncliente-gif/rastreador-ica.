@@ -1,5 +1,5 @@
 ﻿municipio,tipo,url,activo,notas
-Acacias,Portal,https://www.acacias-meta.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
+Acacias,Portal,https://www.acacias.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
 Aguachica,Portal,https://www.aguachica-cesar.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
 Aguazul,Portal,https://www.aguazul-casanare.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
 Aipe,Portal,https://www.aipe-huila.gov.co,SI,URL por verificar (patrón .gov.co); el bot descubre solas las subpáginas de impuestos
