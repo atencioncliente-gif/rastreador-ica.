@@ -24,6 +24,54 @@ DESCUBRIR = ["hacienda", "impuesto", "industria y comercio", "industria-y-comerc
              "acuerdos", "estatuto", "calendario", "tributari", "reteica", "concejo", "rentas", "tesorer"]
 MAX_SUB = 12   # máximo de subpáginas vigiladas por portal
 DOC_RE = re.compile(r"\.(pdf|docx?)($|\?)", re.I)
+VENTANA_DIAS = int(os.getenv("VENTANA_DIAS", "30"))   # solo se reporta lo de los últimos N días
+MESES = {"enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6, "julio": 7,
+         "agosto": 8, "septiembre": 9, "setiembre": 9, "octubre": 10, "noviembre": 11, "diciembre": 12}
+_M = "|".join(MESES)
+RE_F1 = re.compile(rf"\b(\d{{1,2}})\s*(?:de\s+)?({_M})\s*(?:de|del|,)?\s*((?:19|20)\d{{2}})\b", re.I)   # 27 de diciembre de 2018
+RE_F2 = re.compile(rf"\b({_M})\s*(\d{{1,2}})\s*(?:de|del|,)?\s*((?:19|20)\d{{2}})\b", re.I)            # diciembre 27 de 2018
+RE_F3 = re.compile(r"\b(\d{1,2})[/\-.](\d{1,2})[/\-.]((?:19|20)\d{2})\b")                              # 27/12/2018
+RE_F4 = re.compile(r"\b((?:19|20)\d{2})-(\d{2})-(\d{2})\b")                                             # 2018-12-27
+RE_ANIO = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
+
+def _d(y, m, d):
+    try: return datetime.date(int(y), int(m), int(d))
+    except ValueError: return None
+
+def fechas_en(texto):
+    """Devuelve (fechas_completas, años_sueltos) encontrados en un texto."""
+    f = []
+    for m in RE_F1.finditer(texto): f.append(_d(m[3], MESES[m[2].lower()], m[1]))
+    for m in RE_F2.finditer(texto): f.append(_d(m[3], MESES[m[1].lower()], m[2]))
+    for m in RE_F3.finditer(texto): f.append(_d(m[3], m[2], m[1]))
+    for m in RE_F4.finditer(texto): f.append(_d(m[1], m[2], m[3]))
+    f = [x for x in f if x]
+    anios = [int(a) for a in RE_ANIO.findall(texto)]
+    return f, anios
+
+def es_reciente(texto, hoy=None):
+    """True/False si el texto trae fecha; None si no trae ninguna (no se puede saber)."""
+    hoy = hoy or datetime.date.today()
+    corte = hoy - datetime.timedelta(days=VENTANA_DIAS)
+    f, anios = fechas_en(texto)
+    if f:
+        return max(f) >= corte                    # fecha completa: dentro de la ventana (o futura)
+    anios = [a for a in anios if a <= hoy.year + 2]
+    if anios:
+        return max(anios) >= corte.year           # solo año: descarta años anteriores a la ventana
+    return None
+
+def clave_doc(titulo, url):
+    """Identifica un documento por su título (las URL de muchos portales cambian en cada visita)."""
+    t = re.sub(r"[^a-z0-9áéíóúñ]+", " ", (titulo or "").lower()).strip()
+    return t or url
+
+def docs_previos(previo):
+    """Conjunto de claves de documentos ya vistos (compatible con el formato anterior url->título)."""
+    ks = set(previo.get("docs2", {}))
+    for u, t in previo.get("docs", {}).items():
+        ks.add(clave_doc(t, u))
+    return ks
 
 def limpiar(html):
     s = BeautifulSoup(html, "html.parser")
@@ -92,42 +140,60 @@ def revisar(fila):
         return {"municipio": mun, "tipo": tipo, "url": url, "estado": "ERROR", "detalle": f"{err} (intento consecutivo {falls})"}
     lineas, soup = limpiar(html)
     docs = enlaces_doc(soup, url)
-    nuevo = {"lineas": lineas, "docs": docs, "fecha": datetime.date.today().isoformat(), "fallos": 0}
+    hoy = datetime.date.today().isoformat()
+    vistos_prev = (previo or {}).get("docs2", {})
+    docs2 = {}
+    for u, t in docs.items():
+        k = clave_doc(t, u)
+        docs2[k] = vistos_prev.get(k) or {"t": t, "u": u, "v": hoy}     # "v" = primera vez que se vio
+    nuevo = {"lineas": lineas, "docs": docs, "docs2": docs2, "fecha": hoy, "fallos": 0}
     json.dump(nuevo, open(ruta, "w", encoding="utf-8"), ensure_ascii=False)
     if previo is None:
         return {"municipio": mun, "tipo": tipo, "url": url, "estado": "BASE", "detalle": "Primera lectura guardada"}
-    agreg = [l[2:] for l in difflib.ndiff(previo["lineas"], lineas) if l.startswith("+ ")]
-    quit_ = [l[2:] for l in difflib.ndiff(previo["lineas"], lineas) if l.startswith("- ")]
-    docs_nuevos = {u: t for u, t in docs.items() if u not in previo.get("docs", {})}
-    if not agreg and not quit_ and not docs_nuevos:
-        return {"municipio": mun, "tipo": tipo, "url": url, "estado": "SIN CAMBIOS", "detalle": ""}
+    # --- documentos: solo los que no se habían visto Y no son claramente antiguos
+    ya = docs_previos(previo)
+    docs_nuevos, descartados = {}, 0
+    for k, d in docs2.items():
+        if k in ya: continue
+        rec = es_reciente(d["t"] + " " + d["u"])
+        if rec is False: descartados += 1; continue      # trae fecha/año viejo -> se ignora
+        docs_nuevos[d["u"]] = d["t"] + ("" if rec else "  (sin fecha visible)")
+    # --- texto: solo líneas agregadas con palabras tributarias y que no sean de fechas viejas
+    set_prev = set(previo["lineas"])
+    agreg = [l for l in lineas if l not in set_prev and len(l) >= 15 and es_reciente(l) is not False]
+    quit_ = [l for l in previo["lineas"] if l not in set(lineas)][:8]
     claves = relevancia(agreg + list(docs_nuevos.values()))
-    estado = "CAMBIO RELEVANTE" if (claves or docs_nuevos) else "CAMBIO MENOR"
-    return {"municipio": mun, "tipo": tipo, "url": url, "estado": estado, "claves": claves,
-            "agregado": agreg[:15], "quitado": quit_[:8], "docs_nuevos": docs_nuevos}
+    titulos = {d.split("  (sin fecha")[0].strip() for d in docs_nuevos.values()}
+    agreg_rel = [l for l in agreg if relevancia([l]) and l.strip() not in titulos]
+    if not docs_nuevos and not (claves and agreg_rel):
+        return {"municipio": mun, "tipo": tipo, "url": url, "estado": "SIN CAMBIOS", "detalle": f"ignorados antiguos: {descartados}"}
+    return {"municipio": mun, "tipo": tipo, "url": url, "estado": "CAMBIO RELEVANTE", "claves": claves,
+            "agregado": agreg_rel[:10], "quitado": quit_, "docs_nuevos": docs_nuevos}
 
 def informe(res):
-    hoy = datetime.date.today().isoformat()
+    hoy = datetime.date.today()
+    desde = (hoy - datetime.timedelta(days=VENTANA_DIAS)).strftime("%d/%m/%Y")
     rel = [r for r in res if r["estado"] == "CAMBIO RELEVANTE"]
-    men = [r for r in res if r["estado"] == "CAMBIO MENOR"]
     err = [r for r in res if r["estado"] == "ERROR"]
-    base = [r for r in res if r["estado"] == "BASE"]
-    L = [f"# Rastreador ICA – informe {hoy}", "",
-         f"Páginas revisadas: {len(res)} | Cambios relevantes: {len(rel)} | Cambios menores: {len(men)} | Errores: {len(err)} | Primera lectura: {len(base)}", ""]
+    L = [f"# Rastreador ICA – informe {hoy.isoformat()}", "",
+         f"Solo normativa nueva o actualizada desde {desde} (últimos {VENTANA_DIAS} días). "
+         f"Páginas revisadas: {len(res)} | Con novedades: {len(rel)} | No se pudieron leer: {len(err)}", ""]
     if rel:
-        L.append("## ⚠️ MUNICIPIOS CON CAMBIO RELEVANTE (revisar primero)")
+        L.append("## ⚠️ NOVEDADES NORMATIVAS (revisar)")
         for r in rel:
-            L += ["", f"### {r['municipio']} – {r['tipo']}", r["url"], f"Palabras detectadas: {', '.join(r['claves'])}"]
-            for u, t in r["docs_nuevos"].items(): L.append(f"- NUEVO DOCUMENTO: {t or 'sin título'} → {u}")
-            for a in r["agregado"]: L.append(f"- + {a[:200]}")
-    if men:
-        L += ["", "## Cambios menores (probablemente sin impacto)"] + [f"- {r['municipio']} – {r['tipo']}: {r['url']}" for r in men]
+            L += ["", f"### {r['municipio']} – {r['tipo']}", r["url"]]
+            for u, t in r["docs_nuevos"].items(): L.append(f"- NUEVO: {t or 'sin título'} → {u}")
+            for a in r["agregado"]: L.append(f"- Texto nuevo/actualizado: {a[:200]}")
+    else:
+        L.append("✅ Sin novedades normativas en los últimos %d días." % VENTANA_DIAS)
     if err:
-        L += ["", "## Páginas que no se pudieron leer (revisar manualmente o corregir URL)"] + [f"- {r['municipio']} – {r['tipo']}: {r['detalle']} – {r['url']}" for r in err]
-    if not (rel or men or err):
-        L.append("Sin cambios en ninguna página.")
-    L += ["", "_Este informe es una alerta automática. Valide cada cambio contra la norma oficial antes de actuar._"]
+        L += ["", f"_({len(err)} páginas no se pudieron leer; el detalle está en informe_cambios.md del repositorio)_"]
+    L += ["", "_Alerta automática. Valide cada novedad contra la norma oficial antes de actuar._"]
     return "\n".join(L)
+
+def detalle_errores(res):
+    err = [r for r in res if r["estado"] == "ERROR"]
+    return "\n".join(["", "## Páginas que no se pudieron leer"] + [f"- {r['municipio']} – {r['tipo']}: {r['detalle']} – {r['url']}" for r in err]) if err else ""
 
 def enviar(asunto, cuerpo):
     h, u, p, to = (os.getenv(k) for k in ("SMTP_HOST", "SMTP_USER", "SMTP_PASS", "MAIL_TO"))
@@ -154,10 +220,10 @@ def main():
         print("Revisando", fila["municipio"], fila["tipo"])
         res.append(revisar(fila)); time.sleep(1)
     texto = informe(res)
-    open(os.path.join(HERE, "informe_cambios.md"), "w", encoding="utf-8").write(texto)
-    print(texto)
+    open(os.path.join(HERE, "informe_cambios.md"), "w", encoding="utf-8").write(texto + detalle_errores(res))
+    print(texto + detalle_errores(res))
     rel = sum(r["estado"] == "CAMBIO RELEVANTE" for r in res)
-    if "--sin-correo" not in sys.argv and (rel or any(r["estado"] == "ERROR" for r in res)):
+    if "--sin-correo" not in sys.argv and rel:
         enviar(f"Rastreador ICA: {rel} municipio(s) con cambio relevante", texto)
 
 if __name__ == "__main__":
